@@ -5,6 +5,10 @@
 
   var Ship = Asteroids.Ship = function (pos) {
     this.vel = [0, 0];
+    this.direction = [0, 1];
+    this.rotateLeft = false;
+    this.rotateRight = false;
+    this.degree = 0;
     Asteroids.MovingObject.call(this, pos, this.vel, 10, "red");
   };
 
@@ -15,13 +19,22 @@
     this.vel[1] += impulse[1];
   };
 
+  []
+
   Ship.prototype.draw = function (ctx) {
+    ctx.save();
+    var center = this.pos[1] + 25;
+    ctx.translate(this.pos[0], center);
+
+    ctx.rotate(this.degree);
+    ctx.translate(-this.pos[0], -center);
 
     ctx.beginPath();
     ctx.moveTo(this.pos[0],this.pos[1]);
-    ctx.lineTo(this.pos[0] + 10,this.pos[1] + 10);
-    ctx.lineTo(this.pos[0] + 25,this.pos[1] + 105);
+    ctx.lineTo(this.pos[0] + -20,this.pos[1] + 50);
+    ctx.lineTo(this.pos[0] + 20,this.pos[1] + 50);
     ctx.fill();
+    ctx.restore();
   }
 
   Ship.prototype.fireBullet = function () {

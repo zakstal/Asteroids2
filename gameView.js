@@ -11,10 +11,13 @@
   };
 
   AsteroidView.prototype.bindKeyHandlers = function () {
-    key('up, w', function(){ ast.game.ship.power([0, -1]) });
+    ast.game.ship.direction = 
+    key('up, w', function(){ ast.game.ship.power([0, -1 *]) });
     key('down, s', function(){ ast.game.ship.power([0, 1]) });
-    key('left, a', function(){ ast.game.ship.power([-1, 0]) });
-    key('right, d', function(){ ast.game.ship.power([1, 0]) });
+    // key('left, a', function(){ ast.game.ship.power([-1, 0]) });
+    key('left, a', function(){ Asteroids.Util.rotate('counterClockwise')});
+    // key('right, d', function(){ ast.game.ship.power([1, 0]) });
+    key('right, d', function(){ Asteroids.Util.rotate('clockwise') });
     key('esc', function(){
       if (ast.counter === 0){
         ast.counter = 1;
@@ -62,7 +65,7 @@
       }
     }
 
-console.log("goingggg")
+// console.log("goingggg")
 
     }, 20);
   };
