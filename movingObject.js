@@ -44,4 +44,8 @@
     }
   };
 
+  MoO.prototype.speed = function () {
+    return Math.sqrt(Math.pow(this.vel[0], 2) + Math.pow(this.vel[1], 2));
+  };
+
 })();

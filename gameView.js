@@ -11,13 +11,19 @@
   };
 
   AsteroidView.prototype.bindKeyHandlers = function () {
-    ast.game.ship.direction = 
-    key('up, w', function(){ ast.game.ship.power([0, -1 *]) });
-    key('down, s', function(){ ast.game.ship.power([0, 1]) });
+
+    key('up, w', function(){ ast.game.ship.power("forward") });
+    key('down, s', function(){ ast.game.ship.power("reverse") });
     // key('left, a', function(){ ast.game.ship.power([-1, 0]) });
-    key('left, a', function(){ Asteroids.Util.rotate('counterClockwise')});
+    key('left, a', function(){
+      ast.game.ship.rotateLeft = false;
+      ast.game.ship.rotateRight = true;
+    });
     // key('right, d', function(){ ast.game.ship.power([1, 0]) });
-    key('right, d', function(){ Asteroids.Util.rotate('clockwise') });
+    key('right, d', function(){
+      ast.game.ship.rotateRight = false;
+      ast.game.ship.rotateLeft = true;
+    });
     key('esc', function(){
       if (ast.counter === 0){
         ast.counter = 1;
@@ -33,6 +39,13 @@
     key('space', function(){
       bullet = ast.game.ship.fireBullet();
       ast.game.bullets.push(bullet);
+    });
+
+    document.addEventListener("keyup", function(event) {
+      if (event.keyCode === 39 || event.keyCode === 37) {
+        ast.game.ship.rotateRight = false;
+        ast.game.ship.rotateLeft = false;
+      }
     });
   };
 

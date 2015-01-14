@@ -27,31 +27,25 @@
     return [x, y];
   };
 
-  Util.prototype.rotate = function ( direction) {
-    console.log("here");
+  Util.prototype.rotateDegree = function (direction) {
     if (direction === "clockwise"){
-      var oneDegree = (Math.PI / 180) * 5
+      var oneDegree = (Math.PI /  360) * 10
     } else if ( direction === "counterClockwise") {
-      var oneDegree = (Math.PI / -180) * 5
+      var oneDegree = (Math.PI / -360) * 10
     }
 
-    ast.game.ship.degree = ast.game.ship.degree + oneDegree;
+    this.degree = this.degree + oneDegree;
+  };
 
-    return;
-    // // Clear the canvas
-    // ctx.save();
-    // // ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    //
-    // // Move registration point to the center of the canvas
-    // ctx.translate(pos[0], pos[1]);
-    //
-    // // Rotate 1 degree
-    // ctx.rotate(Math.PI / 180);
-    // // Move registration point back to the top left corner of canvas
-    // ctx.translate(-pos[0], -pos[1]);
-    //
-    // ast.game.ship.draw(ctx);
-    // ctx.restore();
+  Util.prototype.rotateImage = function (draw) {
+    ctx.save();
+    var center = this.pos[1] + 40;
+    ctx.translate(this.pos[0], center);
+
+    ctx.rotate(this.degree);
+    ctx.translate(-this.pos[0], -center);
+    draw();
+    ctx.restore();
   };
 
 
