@@ -8,6 +8,7 @@
     this.rotateLeft = false;
     this.rotateRight = false;
     this.degree = 0;
+    this.color = 'red';
     Asteroids.MovingObject.call(this, pos, this.vel, 10, "red");
   };
 
